@@ -7,17 +7,21 @@ import world.Creature;
 import world.World;
 import world.WorldBuilder;
 
+import java.io.*;
 import java.util.Map;
 
 public class ServerMain {
     public static final ServerMain INSTANCE = new ServerMain();
-    private static int playerLimit = 2;
+    private static int playerLimit = 4;
     private Server GameServer;
     private World world;
     public ServerMain(){
         GameServer = new Server();
         //初始化地图
         createWorld();
+
+    }
+    public void startGame(){
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -30,6 +34,7 @@ public class ServerMain {
                             if(world.getPlayers().size() == 1){
                                 gameOver();
                                 ServerHandler.gameState = false;
+                                break;
                             }
                             //if(world.getPlayers().size() == 0){
                             //游戏未完全结束
@@ -49,8 +54,35 @@ public class ServerMain {
         serverMain.GameServer.serverStart();
     }
     public void createWorld(){
-        world = new WorldBuilder(10,10).makeMap().build();
-
+        //先看能否读取地图
+        File file = new File("world.data");
+        if(!file.exists()) {
+            //创建地图
+            world = new WorldBuilder(10, 10).makeMap().build();
+            try {
+                FileOutputStream fos = new FileOutputStream("world.data");
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                oos.writeObject(world);
+                oos.close();
+                fos.close();
+                System.out.println("地图创建并保存");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            try {
+                FileInputStream is = new FileInputStream("world.data");
+                //FileInputStream is = new FileInputStream("src\\main\\resources\\world.data");
+                ObjectInputStream ois = new ObjectInputStream(is);
+                world = (World) ois.readObject();
+                ois.close();
+                is.close();
+                System.out.println("地图加载成功");
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
     }
     public World getWorld(){
         return this.world;

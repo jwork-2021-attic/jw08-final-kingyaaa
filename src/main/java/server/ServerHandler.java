@@ -49,8 +49,10 @@ public class ServerHandler extends ChannelInboundHandlerAdapter{
                        }
                    }
                    if(start == true){
+                       //加载地图
                        //开始游戏
                        gameState = true;
+                       ServerMain.INSTANCE.startGame();
                        StartGameResponse startGameResponse = new StartGameResponse();
                        Server.clients.writeAndFlush(startGameResponse);
                    }
