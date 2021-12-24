@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="jboss.marshalling.serial" type="repository">
+    <properties maven-id="org.jboss.marshalling:jboss-marshalling-serial:2.0.9.Final" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/jboss/marshalling/jboss-marshalling-serial/2.0.9.Final/jboss-marshalling-serial-2.0.9.Final.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/jboss/marshalling/jboss-marshalling/2.0.9.Final/jboss-marshalling-2.0.9.Final.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
