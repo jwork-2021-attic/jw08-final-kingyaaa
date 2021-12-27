@@ -17,6 +17,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.BufferedInputStream;
 import java.io.File;
 
 
@@ -34,6 +35,11 @@ public class GameFrame extends JFrame implements KeyListener {
     private volatile int gameState;//0:未开始 1:进行中 2:结束
     private boolean win;
     private boolean loginCondition;
+
+    public static void main(String[] args) throws Exception{
+        GameFrame.INSTANCE.connnectToServer();
+    }
+
     public GameFrame(int width, int height, int unit){
         this.client = new Client();
 
@@ -54,6 +60,7 @@ public class GameFrame extends JFrame implements KeyListener {
             @Override
             public void windowClosing(WindowEvent e) {
                 client.send(new CloseRequest(myPlayerId()));
+                System.exit(0);
             }
         });
         //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -68,7 +75,10 @@ public class GameFrame extends JFrame implements KeyListener {
         this.setLocation(leftTopX, leftTopY);
 
         try{
-            audio = AudioSystem.getAudioInputStream(new File("src\\main\\resources\\bgm.wav").getAbsoluteFile());
+
+            //audio = AudioSystem.getAudioInputStream(new File("bgm.wav").getAbsoluteFile());
+            //audio = AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getClassLoader().getResource("bgm.wav")));
+            audio = AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getClassLoader().getResourceAsStream("bgm.wav")));
             clip = AudioSystem.getClip();
             clip.open(GameFrame.audio);
         }catch (Exception e){
@@ -141,9 +151,7 @@ public class GameFrame extends JFrame implements KeyListener {
         GameFrame.INSTANCE.client.connect();
     }
 
-    public static void main(String[] args) throws Exception{
-        GameFrame.INSTANCE.connnectToServer();
-    }
+
     /**
      *
      * @param e

@@ -108,7 +108,7 @@ public class World implements Serializable {
         return null;
     }
     public synchronized Bomb bomb(int x,int y) throws NullPointerException{
-        System.out.println("炸弹数量:" + bombs.size());
+        //System.out.println("炸弹数量:" + bombs.size());
         try {
             for (Bomb bomb : this.bombs) {
                 //if(bomb == null){

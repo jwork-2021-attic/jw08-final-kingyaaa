@@ -146,4 +146,8 @@ public class Bomb implements Runnable, Serializable {
             }
         }
     }
+
+    public int getRadius() {
+        return radius;
+    }
 }

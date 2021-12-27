@@ -19,10 +19,8 @@ public class ClientHandler extends ChannelInboundHandlerAdapter{
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         //直接将msg强转为ResponseEntity
         try {
-            //ResponseEntity entity = (ResponseEntity) msg;
-            //System.out.println(entity.getId() + " " + entity.getName());
-            //System.out.println("收到msg");
 
+            //System.out.println("收到Msg");
             if(msg instanceof LoginResponse){
                 if(GameFrame.INSTANCE.myPlayerId() == 0) {
                     LoginResponse loginResp = (LoginResponse)msg;

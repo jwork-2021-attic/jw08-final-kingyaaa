@@ -19,6 +19,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter{
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception{
         Server.clients.add(ctx.channel());
+        Server.clients.writeAndFlush(new StartGameResponse());
     }
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {

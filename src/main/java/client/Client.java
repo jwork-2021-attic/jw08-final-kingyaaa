@@ -34,11 +34,7 @@ public class Client {
         //连接服务端
         ChannelFuture cf = bs.connect("127.0.0.1", 9876).sync();
         channel = cf.channel();
-        //给服务端写数据
-        //for(int i=0;i<10;i++){
-        //    RequestEntity entity = new RequestEntity(Integer.toString(i), "Client.Client"+i);
-        //    cf.channel().writeAndFlush(entity);
-        //}
+        
 
         //异步监听管道的关闭，如果关闭了就往下执行
         cf.channel().closeFuture().sync();

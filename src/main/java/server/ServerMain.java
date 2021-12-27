@@ -99,15 +99,15 @@ public class ServerMain {
             int id = player.getKey();
             if(id == 1 || id == 3){
                 GameServer.send(new WinGameResponse(1));
-                //GameServer.send(new WinGameResponse(3));
+                GameServer.send(new WinGameResponse(3));
                 GameServer.send(new LoseGameResponse(2));
-                //GameServer.send(new LoseGameResponse(4));
+                GameServer.send(new LoseGameResponse(4));
             }
             else if(id == 2 || id == 4){
                 GameServer.send(new WinGameResponse(2));
-                //GameServer.send(new WinGameResponse(4));
+                GameServer.send(new WinGameResponse(4));
                 GameServer.send(new LoseGameResponse(1));
-                //GameServer.send(new LoseGameResponse(3));
+                GameServer.send(new LoseGameResponse(3));
             }
         }
     }
